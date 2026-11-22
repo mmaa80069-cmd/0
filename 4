@@ -1,1 +1,79 @@
 
+#include <amxmodx>
+
+#define PLUGIN_NAME    "Zombie Swarm Pro"
+#define PLUGIN_VERSION "0.1.0"
+#define PLUGIN_AUTHOR  "Zombie Swarm Pro"
+
+public plugin_init()
+{
+    register_plugin(PLUGIN_NAME, PLUGIN_VERSION, PLUGIN_AUTHOR);
+
+    register_clcmd("say /zsmenu", "cmd_show_menu");
+    register_clcmd("say_team /zsmenu", "cmd_show_menu");
+}
+
+public cmd_show_menu(id)
+{
+    if (!is_user_connected(id))
+        return PLUGIN_HANDLED;
+
+    new menu = menu_create("\yZombie Swarm Pro", "menu_main_handler");
+
+    menu_additem(menu, "Zombie Plague", "1");
+    menu_additem(menu, "Zombie Swarm", "2");
+
+    menu_setprop(menu, MPROP_EXITNAME, "Exit");
+    menu_display(id, menu);
+
+    return PLUGIN_HANDLED;
+}
+
+public menu_main_handler(id, menu, item)
+{
+    if (item == MENU_EXIT)
+    {
+        menu_destroy(menu);
+        return PLUGIN_HANDLED;
+    }
+
+    new data[8];
+    new item_name[64];
+    new access;
+    new callback;
+
+    menu_item_getinfo(
+        menu,
+        item,
+        access,
+        data,
+        charsmax(data),
+        item_name,
+        charsmax(item_name),
+        callback
+    );
+
+    switch (str_to_num(data))
+    {
+        case 1:
+        {
+            client_print(
+                id,
+                print_chat,
+                "[ZSP] Zombie Plague selected. Mode logic is not implemented yet."
+            );
+        }
+
+        case 2:
+        {
+            client_print(
+                id,
+                print_chat,
+                "[ZSP] Zombie Swarm selected. Mode logic is not implemented yet."
+            );
+        }
+    }
+
+    menu_destroy(menu);
+    return PLUGIN_HANDLED;
+}
