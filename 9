@@ -1,1 +1,52 @@
+#include <amxmodx>
 
+#define PLUGIN_NAME "Zombie Swarm Pro"
+#define PLUGIN_VERSION "0.1"
+#define PLUGIN_AUTHOR "Zombie Swarm Pro Team"
+
+public plugin_init()
+{
+    register_plugin(PLUGIN_NAME, PLUGIN_VERSION, PLUGIN_AUTHOR);
+    register_clcmd("say /zsmenu", "show_main_menu");
+    register_clcmd("say_team /zsmenu", "show_main_menu");
+}
+
+public show_main_menu(id)
+{
+    new menu = menu_create("Zombie Swarm Pro", "main_menu_handler");
+
+    menu_additem(menu, "Zombie Plague", "1");
+    menu_additem(menu, "Zombie Swarm", "2");
+
+    menu_setprop(menu, MPROP_EXITNAME, "Exit");
+    menu_display(id, menu);
+
+    return PLUGIN_HANDLED;
+}
+
+public main_menu_handler(id, menu, item)
+{
+    if (item == MENU_EXIT)
+    {
+        menu_destroy(menu);
+        return PLUGIN_HANDLED;
+    }
+
+    new data[6], name[64], access, callback;
+    menu_item_getinfo(menu, item, access, data, charsmax(data), name, charsmax(name), callback);
+
+    switch (str_to_num(data))
+    {
+        case 1:
+        {
+            client_print(id, print_chat, "[ZSP] Zombie Plague selected.");
+        }
+        case 2:
+        {
+            client_print(id, print_chat, "[ZSP] Zombie Swarm selected.");
+        }
+    }
+
+    menu_destroy(menu);
+    return PLUGIN_HANDLED;
+}
