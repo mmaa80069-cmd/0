@@ -1,1 +1,53 @@
+Zombie Swarm Pro - Project Structure
 
+Main Menu
+
+- Zombie Plague
+- Zombie Swarm
+
+Game Mode Selection
+
+Each mode has:
+
+- Offline with Bots
+- Online Multiplayer
+
+Project Modules
+
+Zombie Plague
+
+- XP and Level System
+- Human and Zombie Classes
+- Weapons Shop
+- VIP / Admin / Super Admin
+
+Zombie Swarm
+
+- Jetpack
+- Leap
+- Flesh Throw
+- Infection Knife
+- XP and Level System
+- Human and Zombie Classes
+- VIP / Admin / Super Admin
+
+Android Client
+
+- Xash3D / CS16Client
+- Counter-Strike 1.6 game data
+
+Server
+
+- ReHLDS
+- Metamod
+- AMX Mod X
+
+Configuration
+
+- Separate settings for each mode
+- Separate XP and Level data
+- Player rank and permissions
+
+Development Status
+
+Planning and initial development.
